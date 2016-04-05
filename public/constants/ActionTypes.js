@@ -1,0 +1,10 @@
+/**
+ * Created by Vitaly.Zayets on 22-Mar-16.
+ */
+export const NEW_CITY = 'NEW_CITY'
+export const CHANGE_CITY = 'CHANGE_CITY'
+export const GET_PHOTOS_REQUEST = 'GET_PHOTOS_REQUEST'
+export const GET_PHOTOS_SUCCESS = 'GET_PHOTOS_SUCCESS'
+export const GET_PHOTOS_FAILURE = 'GET_PHOTOS_FAILURE'
+export const GET_WEATHER_REQUEST = 'GET_WEATHER_REQUEST'
+export const CHANGE_CITY_WEATHER = 'CHANGE_CITY_WEATHER'
