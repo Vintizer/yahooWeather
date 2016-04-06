@@ -16,7 +16,7 @@ class App extends Component {
 		return <div className='row'>
 			<h1>{city.name}</h1>
 			<SelectBox setCity={setCity} getWeather={getWeather}/>
-			<WeatherBox pict={weather.pict || ""} request={weather.request} day={weather.day || ""} condition={weather.condition || ""}/>
+			<WeatherBox arr={weather.arr} request={weather.request}/>
 			<FlickrBox url={photo.url} request={photo.request}/>
 		</div>
 	}

@@ -17,6 +17,7 @@ var Flickr = require("flickrapi"),
 	};
 
 var compiler = webpack(config);
+app.use(express.static(__dirname + '/public/static'));
 app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: config.output.publicPath}));
 app.use(webpackHotMiddleware(compiler));
 

@@ -3,13 +3,11 @@
  */
 
 import {
-	CHANGE_CITY_WEATHER, GET_PHOTOS_REQUEST
+	CHANGE_CITY_WEATHER, GET_PHOTOS_REQUEST,GET_WEATHER_REQUEST
 } from '../constants/ActionTypes'
 const initialState = {
-	pict: "",
-	day: "",
-	condition: "",
-	request: false
+	arr: [],
+	request:false
 };
 
 export default function weather(state = initialState, action) {
@@ -19,8 +17,9 @@ export default function weather(state = initialState, action) {
 			return {...state, request: true}
 		
 		case CHANGE_CITY_WEATHER:
-			return {...state, pict: action.payload.pict, day: action.payload.day, condition: action.payload.condition, request: false}
-
+			return {...state, arr: action.payload, request: false}
+		case GET_WEATHER_REQUEST:
+			return {...state, arr: action.payload, request: true}
 		default:
 			return state;
 	}

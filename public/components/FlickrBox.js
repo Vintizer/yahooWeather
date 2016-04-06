@@ -5,12 +5,10 @@ import React, {PropTypes, Component} from 'react'
 export default class FlickrBox extends Component {
 	render() {
 		const {url, request} = this.props
+		console.log("requestFlickrBox",request);
 		return (
 			<div>
-				<img  className={request ? "loading": ""}  src={url} alt="ImgBoxImport"/>
-				<div className={request ? "loading bar": ""}>
-					<i className="sphere"></i>
-				</div>
+				<img  className={request ? "loaded photo": "photo"}  src={url} alt="ImgBoxImport"/>
 			</div>
 		);
 	}

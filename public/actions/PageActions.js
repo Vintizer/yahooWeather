@@ -5,9 +5,9 @@ import {
 	CHANGE_CITY_WEATHER,
 	GET_WEATHER_REQUEST
 } from '../constants/ActionTypes'
-import {NO_CITY} from "../constants/Other"
+import {NO_CITY, KHARKIV, TASHKENT, SAINT_PETERSBURG} from "../constants/Other"
 import $ from "jquery"
-import conditionsRu from "../utils/conditionsRu"
+import conditions from "../utils/conditions"
 
 export function setCity(city) {
 	return (dispatch) => {
@@ -34,24 +34,27 @@ export function getWeather(cityName) {
 		if (cityName === NO_CITY) {
 			dispatch({
 				type: "NO_CHANGE_CITY_WEATHER",
-				payload: {
-					pict: "",
-					day: "",
-					condition: ""
-				}
+				payload: []
 			});
 		} else {
 			dispatch({
 				type: GET_WEATHER_REQUEST,
-				payload: {
-					pict: "",
-					day: "",
-					condition: ""
-				}
+				payload: []
 			});
 			let DEG = 'c';
-			let wsql = 'select * from weather.forecast where woeid in (select woeid from geo.places(1) ' +
-					'where text="' + cityName + '")  and u = "' + DEG + '"',
+			let woeid;
+			switch (cityName) {
+				case KHARKIV:
+					woeid = "922137";
+					break;
+				case TASHKENT:
+					woeid = "2272113";
+					break;
+				case SAINT_PETERSBURG:
+					woeid = "2123260";
+					break;
+			}
+			let wsql = 'select * from weather.forecast where woeid = "' + woeid + '"  and u = "' + DEG + '"',
 				weatherYQL = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(wsql) + '&format=json&callback=?';
 			$.getJSON(weatherYQL, function(r) {
 
@@ -61,19 +64,22 @@ export function getWeather(cityName) {
 					let weatherArr = [];
 					weatherArr.push(
 						{
-							code: item.code,
+							code: conditions(item.code),
 							day: "Today",
-							condition: item.text + ' <b>'+item.temp+'°'+DEG+'</b>'
+							condition: item.text,
+							temp: item.temp + '°' + DEG
 						}
 					)
 
-					for (var i = 0; i < 2; i++) {
+					for (var i = 1; i < 3; i++) {
 						item = r.query.results.channel.item.forecast[i];
 						weatherArr.push(
 							{
-								code: item.code,
-								day: item.day + ' <b>' + item.date.replace('\d+$', '') + '</b>',
-								condition: item.text + ' <b>' + item.low + '°' + DEG + ' / ' + item.high + '°' + DEG + '</b>'
+								code: conditions(item.code),
+								day: item.day,
+								date: item.date.replace('\d+$', ''),
+								condition: item.text,
+								temp: item.low + '°' + DEG + ' / ' + item.high + '°' + DEG
 							}
 						)
 					}
@@ -81,22 +87,15 @@ export function getWeather(cityName) {
 
 					let reg = "http[^>]*?gif(.*?)|sei";
 					descr = descr.match(reg)[0];
+					console.log("weatherArr", weatherArr);
 					dispatch({
 						type: CHANGE_CITY_WEATHER,
-						payload: {
-							pict: descr,
-							day: "Today",
-							condition: "" + conditionsRu(item.code) + " " + item.temp + '°' + DEG
-						}
+						payload: weatherArr
 					})
 				} else if (r.query.count === 0) {
 					dispatch({
 						type: CHANGE_CITY_WEATHER,
-						payload: {
-							pict: "",
-							day: "No info from yahoo weather",
-							condition: ""
-						}
+						payload: []
 					})
 				}
 			})
