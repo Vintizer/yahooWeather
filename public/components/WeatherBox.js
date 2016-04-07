@@ -3,13 +3,8 @@
  */
 import React, {PropTypes, Component} from 'react'
 export default class WeatherBox extends Component {
-	handleChange(e) {
-		this.props.setCity(e.target.value)
-	}
-
 	render() {
-		const {arr} = this.props
-		var len = arr.length;
+		const {arr} = this.props;
 		return (
 			<div id="weather">
 				<ul id="scroller">
@@ -73,4 +68,4 @@ export default class WeatherBox extends Component {
 
 WeatherBox.propTypes = {
 	arr: PropTypes.array.isRequired
-}
+};
