@@ -10,8 +10,6 @@ export default class WeatherBox extends Component {
 	render() {
 		const {arr} = this.props
 		var len = arr.length;
-		console.log("arr", arr);
-		// <img src="/img/iconsWeather/cloud.png" />
 		return (
 			<div id="weather">
 				<ul id="scroller">
@@ -34,8 +32,7 @@ export default class WeatherBox extends Component {
 	componentDidUpdate() {
 		var weatherDiv = $('#weather'),
 			scroller = $('#scroller');
-		const {arr, request} = this.props;
-		console.log("request", request);
+		const {arr, request, error} = this.props;
 		var currentSlide = 0;
 		weatherDiv.find('a.previous').click(function(e) {
 			e.preventDefault();
@@ -51,9 +48,8 @@ export default class WeatherBox extends Component {
 			weatherDiv.removeClass('loaded');
 		} else if (arr.length) {
 			weatherDiv.addClass('loaded');
-		} else {
-			weatherDiv.html('<span>Yahoo did not return weather info!</span>');
-			alert("No weather");
+		} else if (error){
+			weatherDiv.html('<span>{error}</span>');
 		}
 
 		function showSlide(i) {
@@ -76,5 +72,5 @@ export default class WeatherBox extends Component {
 };
 
 WeatherBox.propTypes = {
-	arr: PropTypes.Array
+	arr: PropTypes.array.isRequired
 }

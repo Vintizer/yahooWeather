@@ -43,12 +43,16 @@ app.post('/api/photo', function(req, res) {
 		})
 	} else {
 		Flickr.tokenOnly(flickrOptions, function(error, flickr) {
+			if (error) {
+				res.json({
+					url: "error" + error
+				})
+			}
 			var img;
 			var perPage = 10;
 			console.time("get photo");
 			flickr.photos.search({
 				tags: city + ", building",
-				// tag_mode: "all",
 				per_page: perPage,
 				sort: "relevance"
 			}, function(check, data) {

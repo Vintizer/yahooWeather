@@ -3,7 +3,9 @@ import {
 	CHANGE_CITY,
 	GET_PHOTOS_SUCCESS,
 	CHANGE_CITY_WEATHER,
-	GET_WEATHER_REQUEST
+	GET_WEATHER_REQUEST,
+	GET_PHOTOS_FAILURE,
+	GET_WEATHER_FAILURE
 } from '../constants/ActionTypes'
 import {NO_CITY, KHARKIV, TASHKENT, SAINT_PETERSBURG} from "../constants/Other"
 import $ from "jquery"
@@ -19,11 +21,17 @@ export function setCity(city) {
 			payload: city
 		})
 		$.post("/api/photo", {city}, (data) => {
-				console.log("post", data.url);
-				dispatch({
-					type: GET_PHOTOS_SUCCESS,
-					payload: data.url
-				})
+				if (data.url.indexOf("error") === 0) {
+					dispatch({
+						type: GET_PHOTOS_FAILURE,
+						payload: data
+					})
+				} else {
+					dispatch({
+						type: GET_PHOTOS_SUCCESS,
+						payload: data.url
+					})
+				}
 			}
 		)
 	}
@@ -38,8 +46,7 @@ export function getWeather(cityName) {
 			});
 		} else {
 			dispatch({
-				type: GET_WEATHER_REQUEST,
-				payload: []
+				type: GET_WEATHER_REQUEST
 			});
 			let DEG = 'c';
 			let woeid;
@@ -56,8 +63,8 @@ export function getWeather(cityName) {
 			}
 			let wsql = 'select * from weather.forecast where woeid = "' + woeid + '"  and u = "' + DEG + '"',
 				weatherYQL = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(wsql) + '&format=json&callback=?';
-			$.getJSON(weatherYQL, function(r) {
 
+			$.getJSON(weatherYQL, function(r) {
 				if (r.query.count == 1) {
 					let item = r.query.results.channel.item.condition;
 					let descr = r.query.results.channel.item.description;
@@ -71,7 +78,7 @@ export function getWeather(cityName) {
 						}
 					)
 
-					for (var i = 1; i < 3; i++) {
+					for (var i = 1; i < 5; i++) {
 						item = r.query.results.channel.item.forecast[i];
 						weatherArr.push(
 							{
@@ -84,18 +91,13 @@ export function getWeather(cityName) {
 						)
 					}
 
-
-					let reg = "http[^>]*?gif(.*?)|sei";
-					descr = descr.match(reg)[0];
-					console.log("weatherArr", weatherArr);
 					dispatch({
 						type: CHANGE_CITY_WEATHER,
 						payload: weatherArr
 					})
 				} else if (r.query.count === 0) {
 					dispatch({
-						type: CHANGE_CITY_WEATHER,
-						payload: []
+						type: GET_WEATHER_FAILURE
 					})
 				}
 			})
