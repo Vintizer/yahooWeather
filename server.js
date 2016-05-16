@@ -71,5 +71,4 @@ app.post('/api/photo', function(req, res) {
 
 		});
 	}
-
 });

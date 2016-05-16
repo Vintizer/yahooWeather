@@ -5,7 +5,6 @@ import React, {PropTypes, Component} from 'react'
 export default class FlickrBox extends Component {
 	render() {
 		const {url, request, error} = this.props
-		console.log("errorInBox",error);
 		if(error) {
 			return(
 				<div>

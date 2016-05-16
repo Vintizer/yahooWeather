@@ -19,31 +19,37 @@ export default class WeatherBox extends Component {
 				</ul>
 				<a href="#" className="arrow previous">Previous</a>
 				<a href="#" className="arrow next">Next</a>
-
 			</div>
 		)
 	}
 
 	componentDidUpdate() {
-		var weatherDiv = $('#weather'),
+		const weatherDiv = $('#weather'),
 			scroller = $('#scroller');
+		const weatherNext = weatherDiv.find('a.next');
+		const weatherPrev = weatherDiv.find('a.previous');
+		const widthLi = +scroller.css('width').slice(0,-2);
 		const {arr, request, error} = this.props;
-		var currentSlide = 0;
-		weatherDiv.find('a.previous').click(function(e) {
+
+		weatherPrev.click(function(e) {
+			let leftPos = +scroller.css("left").slice(0,-2)
+			let currSlide = -(leftPos)/widthLi;
 			e.preventDefault();
-			showSlide(currentSlide - 1);
+			showSlide(currSlide - 1);
 		});
 
-		weatherDiv.find('a.next').click(function(e) {
+		weatherNext.click(function(e) {
+			let leftPos = +scroller.css("left").slice(0,-2)
+			let currSlide = -(leftPos)/widthLi;
 			e.preventDefault();
-			showSlide(currentSlide + 1);
+			showSlide(currSlide + 1);
 		});
 		showSlide(0);
 		if (request) {
 			weatherDiv.removeClass('loaded');
 		} else if (arr.length) {
 			weatherDiv.addClass('loaded');
-		} else if (error){
+		} else if (error) {
 			weatherDiv.html('<span>{error}</span>');
 		}
 
@@ -59,9 +65,7 @@ export default class WeatherBox extends Component {
 			else if (i == items.length - 1) {
 				weatherDiv.addClass('last');
 			}
-			scroller.animate({left: (-i * 100) + '%'}, function() {
-				currentSlide = i;
-			});
+			scroller.animate({left: (-i * 100) + '%'});
 		}
 	}
 };
