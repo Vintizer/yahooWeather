@@ -1,6 +1,3 @@
-/**
- * Created by Vitaly.Zayets on 29-Mar-16.
- */
 export default function conditions (code) {
 	let weatherIconMap = [
 		'storm', 'storm', 'storm', 'lightning', 'lightning', 'snow', 'hail', 'hail',

@@ -1,6 +1,3 @@
-/**
- * Created by Vitaly.Zayets on 22-Mar-16.
- */
 export const CHANGE_CITY = 'CHANGE_CITY'
 export const GET_PHOTOS_REQUEST = 'GET_PHOTOS_REQUEST'
 export const GET_PHOTOS_SUCCESS = 'GET_PHOTOS_SUCCESS'

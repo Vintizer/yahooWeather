@@ -1,6 +1,3 @@
-/**
- * Created by Vitaly.Zayets on 29-Mar-16.
- */
 import React, {PropTypes, Component} from 'react'
 export default class WeatherBox extends Component {
 	render() {

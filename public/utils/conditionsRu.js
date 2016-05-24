@@ -1,6 +1,3 @@
-/**
- * Created by Vitaly.Zayets on 29-Mar-16.
- */
 export default function conditions (code) {
 	let cond = {
 		'0': 'торнадо',

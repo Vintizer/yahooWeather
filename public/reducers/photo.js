@@ -1,6 +1,3 @@
-/**
- * Created by Vitaly.Zayets on 23-Mar-16.
- */
 import {
 	GET_PHOTOS_SUCCESS, GET_PHOTOS_REQUEST, GET_PHOTOS_FAILURE
 } from '../constants/ActionTypes'

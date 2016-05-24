@@ -1,6 +1,3 @@
-/**
- * Created by Vitaly.Zayets on 21-Mar-16.
- */
 import React, {PropTypes, Component} from 'react'
 export default class FlickrBox extends Component {
 	render() {

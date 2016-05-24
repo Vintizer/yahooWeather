@@ -1,7 +1,3 @@
-/**
- * Created by Vitaly.Zayets on 29-Mar-16.
- */
-
 import {
 	CHANGE_CITY_WEATHER, GET_PHOTOS_REQUEST, GET_WEATHER_REQUEST, GET_WEATHER_FAILURE
 } from '../constants/ActionTypes'

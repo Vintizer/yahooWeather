@@ -1,6 +1,3 @@
-/**
- * Created by Vitaly.Zayets on 21-Mar-16.
- */
 import SelectBox from "../components/SelectBox";
 import FlickrBox from "../components/FlickrBox";
 import WeatherBox from "../components/WeatherBox";

@@ -1,6 +1,3 @@
-/**
- * Created by Vitaly.Zayets on 21-Mar-16.
- */
 import React, { PropTypes, Component } from 'react'
 import {NO_CITY, KHARKIV, TASHKENT, SAINT_PETERSBURG} from '../constants/Other'
 export default class SelectBox extends Component{

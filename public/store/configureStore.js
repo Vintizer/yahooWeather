@@ -1,6 +1,3 @@
-/**
- * Created by Vitaly.Zayets on 22-Mar-16.
- */
 import {createStore, applyMiddleware} from 'redux'
 import rootReducer from '../reducers'
 import createLogger from 'redux-logger'

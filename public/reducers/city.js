@@ -1,8 +1,3 @@
-/**
- * Created by Vitaly.Zayets on 23-Mar-16.
- */
-
-
 import {
 	CHANGE_CITY
 } from '../constants/ActionTypes'
