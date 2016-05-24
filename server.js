@@ -34,7 +34,6 @@ app.listen(app.get('port'), function() {
 });
 
 app.post('/api/photo', function(req, res) {
-	// var city = req.body.city === "SP" ? city === "saint-petersburg" : req.body.city;
 	var city = req.body.city;
 	console.log("city - ",city);
 	if (city === "Please, select city") {
