@@ -2,7 +2,7 @@
  * Created by Vitaly.Zayets on 29-Mar-16.
  */
 export default function conditions (code) {
-	var weatherIconMap = [
+	let weatherIconMap = [
 		'storm', 'storm', 'storm', 'lightning', 'lightning', 'snow', 'hail', 'hail',
 		'drizzle', 'drizzle', 'rain', 'rain', 'rain', 'snow', 'snow', 'snow', 'snow',
 		'hail', 'hail', 'fog', 'fog', 'fog', 'fog', 'wind', 'wind', 'snowflake',

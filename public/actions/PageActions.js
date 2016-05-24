@@ -64,7 +64,7 @@ export function getWeather(cityName) {
 			let wsql = 'select * from weather.forecast where woeid = "' + woeid + '"  and u = "' + DEG + '"',
 				weatherYQL = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(wsql) + '&format=json&callback=?';
 
-			$.getJSON(weatherYQL, function(r) {
+			$.getJSON(weatherYQL, (r) => {
 				if (r.query.count == 1) {
 					let item = r.query.results.channel.item.condition;
 					let descr = r.query.results.channel.item.description;
@@ -78,7 +78,7 @@ export function getWeather(cityName) {
 						}
 					)
 
-					for (var i = 1; i < 5; i++) {
+					for (let i = 1; i < 5; i++) {
 						item = r.query.results.channel.item.forecast[i];
 						weatherArr.push(
 							{

@@ -2,7 +2,7 @@
  * Created by Vitaly.Zayets on 29-Mar-16.
  */
 export default function conditions (code) {
-	var cond = {
+	let cond = {
 		'0': 'торнадо',
 		'1': 'шторм',
 		'2': 'ураган',

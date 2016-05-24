@@ -1,8 +1,8 @@
 export default function wind(direction) {
-	var directions = ['северный', 'северо-восточный', 'восточный', 'юго-восточный',
+	let directions = ['северный', 'северо-восточный', 'восточный', 'юго-восточный',
 		'южный', 'юго-западный', 'западный', 'северо-западный'];
-	var a = direction % 360;
-	var res;
+	let a = direction % 360;
+	let res;
 	if (a < 23 || a > 337) res = 0;
 	else if (a < 68) res = 1;
 	else if (a < 113) res = 2;

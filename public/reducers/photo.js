@@ -12,9 +12,7 @@ const initialState = {
 };
 
 export default function photo(state = initialState, action) {
-
 	switch (action.type) {
-
 		case GET_PHOTOS_REQUEST:
 			return {...state, request: true}
 		

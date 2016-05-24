@@ -22,7 +22,7 @@ class App extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		city: state.city,
 		photo: state.photo,
@@ -30,7 +30,7 @@ function mapStateToProps(state) {
 	}
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
 	return {
 		pageActions: bindActionCreators(pageActions, dispatch)
 	}

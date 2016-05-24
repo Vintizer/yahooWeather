@@ -30,15 +30,29 @@ export default class WeatherBox extends Component {
 		const weatherPrev = weatherDiv.find('a.previous');
 		const widthLi = +scroller.css('width').slice(0,-2);
 		const {arr, request, error} = this.props;
-
-		weatherPrev.click(function(e) {
+		let showSlide = (i) => {
+			let items = scroller.find('li');
+			if (i >= items.length || i < 0 || scroller.is(':animated')) {
+				return false;
+			}
+			weatherDiv.removeClass('first last');
+			if (i == 0) {
+				weatherDiv.addClass('first');
+			}
+			else if (i == items.length - 1) {
+				weatherDiv.addClass('last');
+			}
+			scroller.animate({left: (-i * 100) + '%'});
+		}
+		
+		weatherPrev.click((e) => {
 			let leftPos = +scroller.css("left").slice(0,-2)
 			let currSlide = -(leftPos)/widthLi;
 			e.preventDefault();
 			showSlide(currSlide - 1);
 		});
 
-		weatherNext.click(function(e) {
+		weatherNext.click((e) => {
 			let leftPos = +scroller.css("left").slice(0,-2)
 			let currSlide = -(leftPos)/widthLi;
 			e.preventDefault();
@@ -53,20 +67,7 @@ export default class WeatherBox extends Component {
 			weatherDiv.html('<span>{error}</span>');
 		}
 
-		function showSlide(i) {
-			var items = scroller.find('li');
-			if (i >= items.length || i < 0 || scroller.is(':animated')) {
-				return false;
-			}
-			weatherDiv.removeClass('first last');
-			if (i == 0) {
-				weatherDiv.addClass('first');
-			}
-			else if (i == items.length - 1) {
-				weatherDiv.addClass('last');
-			}
-			scroller.animate({left: (-i * 100) + '%'});
-		}
+
 	}
 };
 
